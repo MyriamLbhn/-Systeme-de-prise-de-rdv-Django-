@@ -1,0 +1,38 @@
+{% extends 'base.html' %} 
+
+{% block title %}Historique des rendez-vous{% endblock %} 
+
+{% block content %} 
+
+{% if user.is_authenticated %}
+
+<h1 class=" ms-5 mt-5 ">Mon historique des rendez-vous</h1>
+
+<div class="shadow p-4 mb-5 bg-body bg-body rounded text-black  m-5 ">
+
+  <!--Appointment Loop-->
+  {% if old_appointments.count > 0 %}
+  <div class="mt-5 ">
+    {% for old_appointment in old_appointments %}
+    <div class="list-group fs-4 border p-3 mb-3">
+      <p class="list-group mt-2">Date : {{ old_appointment.day }}</p>
+      <p class="list-group mt-2">Heure : {{ old_appointment.time }}</p>
+      <p class="list-group mt-2">Motif : {{ old_appointment.motif }}</p>
+    </div>
+    {% endfor %}
+  </div>
+
+  {%else%}
+  <div class="mt-5 ">Vous n'avez pas encore de rendez-vous passés.</div>
+  {% endif %} 
+
+{% else %}
+
+<div class="shadow p-4 mb-5 bg-body bg-body rounded text-black  m-5">
+  <h1 class="p-2  ms-3">Connecte toi d'abord !</h1>
+  <a href="{% url 'login' %}" class="btn btn-secondary text-white">Se connecter</a>
+</div>
+  
+{% endif %} 
+  
+{% endblock %}

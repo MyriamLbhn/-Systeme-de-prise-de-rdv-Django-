@@ -1,0 +1,53 @@
+{% extends 'base.html' %} 
+
+{% block title %}Gestion des rendez-vous{% endblock %} 
+
+{% block content %} 
+
+{% if user.is_staff %} 
+
+{% if user.is_authenticated %}
+
+<div class="shadow p-4 mb-5 bg-body bg-body rounded text-black  m-5 ">
+
+  <h1 class="text-center mt-5 mb-5">Gestion des rendez-vous</h1>
+
+  <div class="table-responsive">
+    <table class="table table-bordered table-striped table-hover mx-auto">
+      <thead>
+        <tr>
+          <th class="text-center" scope="col">Date</th>
+          <th class="text-center" scope="col">Heure</th>
+          <th class="text-center" scope="col">Prénom</th>
+          <th class="text-center" scope="col">Nom de famille</th>
+        </tr>
+      </thead>
+      <tbody id="myTable">
+        {% for old_item in old_items %}
+        <tr>
+          <td class="text-center">{{old_item.day}}</td>
+          <td class="text-center">{{old_item.time}}</td>
+          <td class="text-center">{{old_item.user.first_name}}</td>
+          <td class="text-center">{{old_item.user.last_name}}</td>
+          <td class="text-center">
+            <a class="btn btn-secondary" href="{% url 'appointment_detail' old_item.id %}">Gérer mes notes</a>
+          </td>
+          {% endfor %}
+        </tbody>
+    </table>
+  </div>
+
+</div>
+
+{% else %}
+
+<div class="shadow p-4 mb-5 bg-body bg-body rounded text-black  m-5">
+  <h1 class="p-2  ms-3">Connecte toi d'abord !</h1>
+  <a href="{% url 'login' %}" class="btn btn-secondary text-white">Se connecter</a>
+</div>
+
+{% endif %} 
+
+{% endif %} 
+
+{% endblock %}

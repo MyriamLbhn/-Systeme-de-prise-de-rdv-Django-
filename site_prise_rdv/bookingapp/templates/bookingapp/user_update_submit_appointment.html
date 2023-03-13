@@ -1,0 +1,45 @@
+{% extends 'base.html' %} 
+
+{% block title %}Modifier le rendez-vous{% endblock %} 
+
+{% block content %} 
+
+{% if user.is_authenticated %}
+
+<h1 class="text-center fPersian mt-3">Modifier le rendez-vous</h1>
+
+<div class="shadow p-4 mb-5 bg-body bg-body rounded text-black m-5">
+
+  <form method="post" action="{% url 'user_update_submit_appointment' id %}" class="me-2 ms-2" required>{% csrf_token %}
+    
+    <!--input time-->
+    <h3 class="fPersian mt-4">Time:</h3>
+    <div>
+      <select class="form-select fs-3" name="time">
+        {% for time in times %}
+        <option value="{{time}}">{{time}}</option>
+        {% endfor %}
+    </select>
+    </div>
+    
+    <!--input motive-->
+    <div class="form-group">
+      <h3>Motif du rendez-vous</h3>
+      <input type="text" class="form-control" id="motif" name="motif">
+    </div>
+    <button type="submit" class="btn btn-danger text-white mt-3 fPersian">Confirmer</button>
+
+  </form>
+
+</div>
+
+{% else %}
+
+<div class="shadow p-4 mb-5 bg-body bg-body rounded text-black  m-5">
+  <h1 class="p-2  me-3">Connecte toi d'abord !</h1>
+  <a href="{% url 'login' %}" class="btn btn-secondary text-white">Se connecter</a>
+</div>
+
+{% endif %} 
+
+{% endblock %}

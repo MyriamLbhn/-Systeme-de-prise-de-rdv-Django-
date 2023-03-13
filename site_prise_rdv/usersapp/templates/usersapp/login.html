@@ -1,0 +1,37 @@
+{% extends 'base.html' %} 
+
+{%block title%}Connexion / Inscription{%endblock%} 
+
+{%block content%}
+
+<div class="shadow p-4 mb-5 bg-body bg-body rounded text-black  m-5 ">
+
+  <h2>Se connecter</h2>
+
+  <div>
+    <form method="post">{% csrf_token %} 
+        {% if form.non_field_errors %} 
+          {% for error in form.non_field_errors %}
+            <p class="alert alert-danger">{{ error }}</p>
+          {% endfor %} 
+        {% endif %}
+      <table>{% for field in form %}
+        <tr>
+          <td>{{ field.label_tag }}</td>
+          <td>{{ field }}</td>
+        </tr>{% endfor %}</table>
+      <button type="submit" class="btn btn-secondary" role="button">Se connecter</button>
+    </form>
+  </div>
+
+  <div>
+    <small>Pas encore inscrit.e ?
+      <a href="{% url 'register'%}">S'inscrire</a>
+      <br>Mot de passe oublié ?
+      <a href="{% url 'password_reset' %}">Renouveler mon mot de passe</a>
+    </small>
+  </div>
+
+</div>
+
+{%endblock%}

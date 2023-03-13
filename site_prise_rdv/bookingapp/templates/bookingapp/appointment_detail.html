@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block title %}Détails du rdv{% endblock %}
+
+{% block content %}
+
+<div class="shadow p-4 mb-5 bg-body bg-body rounded text-black  m-5 ">
+
+	<h1 class="">Détails du rendez-vous :</h1>
+
+	<ul class="list-group fs-4 mt-3">
+		<li class="list-group mt-2">Date : {{ appointment.day }}</li>
+		<li class="list-group mt-2">Heure : {{ appointment.time }}</li>
+		<li class="list-group mt-2">Client : {{appointment.user.first_name}} {{appointment.user.last_name}}</li>
+		<li class="list-group mt-2">Motif : {{appointment.motif}}</li>
+		<li class="list-group mt-2">
+			Notes :
+            {% if appointment.notes != ''%}{{ appointment.notes }}
+			    <a href="{% url 'appointment_notes' appointment.id %}"class="btn btn-secondary mt-3">Editer la note</a>
+			    <a href="{% url 'delete_note' appointment.id %}" class="btn btn-danger mt-3">Supprimer la note</a>
+			{% else %}Pas de notes 
+		        <a href="{% url 'appointment_notes' appointment.id %}">Ajouter une note</a>		
+            {% endif %}
+	    </li>
+    </ul>
+</div>
+    
+{%endblock%}

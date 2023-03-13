@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+
+{% block title %}Modifier mes informations{% endblock %}
+
+{% block content %}
+
+<div class="shadow p-4 mb-5 bg-body bg-body rounded text-black  m-5 ">
+
+<h1>Modifier les informations</h1>
+
+<form method="post">
+  {% csrf_token %}
+  {{ form.as_p }}
+  <button type="submit" class="btn btn-secondary" role="button">Enregistrer les modifications</button>
+</form>
+
+</div>
+
+{%endblock%}
